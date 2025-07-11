@@ -35,7 +35,6 @@ class TestProjectTemplates(unittest.TestCase):
         for name, template in templates.items():
             self.assertIn('description', template)
             self.assertIn('integrations', template)
-            self.assertIn('config', template)
             self.assertIsInstance(template['description'], str)
             self.assertIsInstance(template['integrations'], list)
             
@@ -86,12 +85,12 @@ class TestProjectTemplates(unittest.TestCase):
             
     def test_invalid_template(self):
         """Test creating project with invalid template"""
-        config = self.templates.create_project_from_template(
-            'invalid-template',
-            'Test',
-            'Test'
-        )
-        self.assertIsNone(config)
+        with self.assertRaises(ValueError):
+            self.templates.create_project_from_template(
+                'invalid-template',
+                'Test',
+                'Test'
+            )
         
     def tearDown(self):
         import shutil

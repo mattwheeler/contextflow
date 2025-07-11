@@ -56,8 +56,10 @@ class TestCLI(unittest.TestCase):
         
         result = self.runner.invoke(main, ['credentials'])
         self.assertEqual(result.exit_code, 0)
-        self.assertIn('github', result.output)
-        self.assertIn('jira', result.output)
+        # Check for case-insensitive match since Rich may capitalize
+        output_lower = result.output.lower()
+        self.assertIn('github', output_lower)
+        self.assertIn('jira', output_lower)
         
     def test_invalid_setup_integration(self):
         """Test setup command with invalid integration"""
