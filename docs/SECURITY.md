@@ -204,7 +204,7 @@ contextflow remove-credentials github --confirm
 If you discover a security vulnerability in ContextFlow:
 
 1. **Do not** create a public GitHub issue
-2. Email security concerns to: security@contextflow.dev
+2. Email security concerns to: matt.wheeler70@gmail.com
 3. Include detailed information about the vulnerability
 4. Allow time for investigation and fix before public disclosure
 

@@ -204,7 +204,7 @@ Perfect for:
 - Researchers and students
 - Anyone working with AI assistants
 
-[Download ContextFlow](https://github.com/your-org/contextflow) and never lose context again!
+[Download ContextFlow](https://github.com/mattwheeler/contextflow) and never lose context again!
 
 ---
 

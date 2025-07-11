@@ -8,8 +8,8 @@ and documentation across AI-assisted work sessions.
 """
 
 __version__ = "1.0.0"
-__author__ = "ContextFlow Team"
-__email__ = "hello@contextflow.dev"
+__author__ = "Matt Wheeler"
+__email__ = "matt.wheeler70@gmail.com"
 __license__ = "MIT"
 
 from .core.session_updater import SessionUpdater

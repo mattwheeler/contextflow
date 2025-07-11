@@ -18,12 +18,12 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 setup(
     name="contextflow",
     version="1.0.0",
-    author="ContextFlow Team",
-    author_email="hello@contextflow.dev",
+    author="Matt Wheeler",
+    author_email="matt.wheeler70@gmail.com",
     description="AI Session Context & Workflow Automation - Never lose context between AI sessions again",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/contextflow/contextflow",
+    url="https://github.com/mattwheeler/contextflow",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -75,9 +75,8 @@ setup(
         "jira", "confluence", "github", "productivity", "team"
     ],
     project_urls={
-        "Bug Reports": "https://github.com/contextflow/contextflow/issues",
-        "Source": "https://github.com/contextflow/contextflow",
-        "Documentation": "https://docs.contextflow.dev",
-        "Funding": "https://github.com/sponsors/contextflow",
+        "Bug Reports": "https://github.com/mattwheeler/contextflow/issues",
+        "Source": "https://github.com/mattwheeler/contextflow",
+        "Documentation": "https://github.com/mattwheeler/contextflow#readme",
     },
 )

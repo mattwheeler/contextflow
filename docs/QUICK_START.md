@@ -6,7 +6,7 @@ Get up and running with ContextFlow in under 5 minutes!
 
 ```bash
 # Clone the repository
-git clone https://github.com/contextflow/contextflow.git
+git clone https://github.com/mattwheeler/contextflow.git
 cd contextflow
 
 # Install dependencies
