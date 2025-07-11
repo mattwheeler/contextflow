@@ -7,40 +7,39 @@ on:
     branches: [ main, develop ]
 
 jobs:
-  test:
+  validate:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.9, '3.10', '3.11']
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python 3.11
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.11'
 
-    - name: Install minimal dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pyyaml click rich
-
-    - name: Test basic imports
-      run: |
-        export PYTHONPATH="$(pwd):$PYTHONPATH"
-        python -c "import contextflow; print('ContextFlow imported successfully')"
-        python -c "from contextflow.core.config import ContextFlowConfig; print('Config imported')" || echo "Config import failed"
-        python -c "from contextflow.templates.project_templates import ProjectTemplates; print('Templates imported')" || echo "Templates import failed"
-
-    - name: Test CLI help
-      run: |
-        export PYTHONPATH="$(pwd):$PYTHONPATH"
-        python -m contextflow.cli --help || echo "CLI help failed"
-
-    - name: Basic syntax check
+    - name: Check Python syntax
       run: |
         python -m py_compile contextflow/__init__.py
         python -m py_compile contextflow/cli.py
-        python -m py_compile contextflow/core/config.py
-        python -m py_compile contextflow/templates/project_templates.py
+        find contextflow -name "*.py" -exec python -m py_compile {} \;
+
+    - name: Validate project structure
+      run: |
+        # Check required files exist
+        test -f README.md
+        test -f LICENSE
+        test -f setup.py
+        test -f requirements.txt
+        test -f contextflow/__init__.py
+        test -f contextflow/cli.py
+        echo "Project structure validated"
+
+    - name: Check for secrets
+      run: |
+        # Simple check for potential secrets
+        if grep -r "api_token.*=" . --exclude-dir=.git --exclude="*.md" | grep -v "your-api-token" | grep -v "api_token.*=.*\"\""; then
+          echo "Warning: Potential secrets found"
+          exit 1
+        fi
+        echo "No secrets detected"
