@@ -37,9 +37,9 @@ jobs:
 
     - name: Check for secrets
       run: |
-        # Simple check for potential secrets
-        if grep -r "api_token.*=" . --exclude-dir=.git --exclude="*.md" | grep -v "your-api-token" | grep -v "api_token.*=.*\"\""; then
-          echo "Warning: Potential secrets found"
+        # Check for potential hardcoded secrets (excluding legitimate code patterns)
+        if grep -r "api_token.*=" . --exclude-dir=.git --exclude="*.md" | grep -v "your-api-token" | grep -v "api_token.*=.*\"\"" | grep -v "get('api_token'" | grep -v "prompt_for_credential" | grep -v "credentials.get"; then
+          echo "Warning: Potential hardcoded secrets found"
           exit 1
         fi
-        echo "No secrets detected"
+        echo "No hardcoded secrets detected"
