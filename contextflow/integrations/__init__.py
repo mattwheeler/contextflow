@@ -9,6 +9,6 @@ from .github import GitHubIntegration
 
 __all__ = [
     "ConfluenceIntegration",
-    "JiraIntegration", 
+    "JiraIntegration",
     "GitHubIntegration",
 ]

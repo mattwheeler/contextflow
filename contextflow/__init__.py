@@ -19,7 +19,7 @@ from .core.config import ContextFlowConfig
 
 __all__ = [
     "SessionUpdater",
-    "ContextExtractor", 
+    "ContextExtractor",
     "WorkflowManager",
     "ContextFlowConfig",
 ]

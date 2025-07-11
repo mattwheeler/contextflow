@@ -71,8 +71,16 @@ setup(
         ],
     },
     keywords=[
-        "ai", "automation", "documentation", "workflow", "context", 
-        "jira", "confluence", "github", "productivity", "team"
+        "ai",
+        "automation",
+        "documentation",
+        "workflow",
+        "context",
+        "jira",
+        "confluence",
+        "github",
+        "productivity",
+        "team",
     ],
     project_urls={
         "Bug Reports": "https://github.com/mattwheeler/contextflow/issues",
