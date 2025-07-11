@@ -1,0 +1,52 @@
+# ContextFlow Dependencies
+# AI Session Context & Workflow Automation
+
+# Core dependencies
+requests>=2.28.0
+pyyaml>=6.0
+python-dotenv>=0.19.0
+click>=8.0.0
+rich>=12.0.0
+jinja2>=3.0.0
+keyring>=24.0.0
+
+# Date and time handling
+python-dateutil>=2.8.0
+
+# File and path utilities
+pathlib2>=2.3.0; python_version < "3.4"
+
+# Configuration management
+configparser>=5.0.0
+
+# Logging and monitoring
+structlog>=22.0.0
+
+# Optional integrations (install as needed)
+# Atlassian (Confluence/JIRA)
+atlassian-python-api>=3.32.0
+
+# GitHub integration
+PyGithub>=1.55.0
+
+# Notion integration
+notion-client>=2.0.0
+
+# Slack integration
+slack-sdk>=3.19.0
+
+# Microsoft Teams integration
+pymsteams>=0.2.0
+
+# Development dependencies (install with pip install -e .[dev])
+# pytest>=6.0.0
+# pytest-cov>=2.0.0
+# black>=21.0.0
+# flake8>=3.8.0
+# mypy>=0.800
+# pre-commit>=2.15.0
+
+# Documentation dependencies (install with pip install -e .[docs])
+# sphinx>=4.0.0
+# sphinx-rtd-theme>=0.5.0
+# myst-parser>=0.15.0

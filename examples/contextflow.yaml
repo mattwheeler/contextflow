@@ -1,0 +1,103 @@
+# ContextFlow Configuration Example
+# Copy this file to your project root and customize for your needs
+
+project:
+  name: "My Awesome Project"
+  description: "Building the next big thing with AI assistance"
+  type: "software-development"  # Options: software-development, research-project, consulting-project, content-creation, startup-project, academic-research, minimal
+  version: "1.0.0"
+  tags:
+    - "development"
+    - "ai-assisted"
+    - "productivity"
+
+integrations:
+  # Confluence Integration
+  # Credentials stored securely - use: contextflow setup confluence
+  confluence:
+    enabled: true
+    base_url: "https://your-company.atlassian.net"
+    space_key: "PROJ"
+
+  # JIRA Integration
+  # Credentials stored securely - use: contextflow setup jira
+  jira:
+    enabled: true
+    base_url: "https://your-company.atlassian.net"
+    project_key: "PROJ"
+
+  # GitHub Integration
+  # Credentials stored securely - use: contextflow setup github
+  github:
+    enabled: true
+    repository: "your-org/your-repo"
+
+  # Notion Integration (Optional)
+  # Credentials stored securely - use: contextflow setup notion
+  notion:
+    enabled: false
+    database_id: ""  # Database ID for project tracking
+
+  # Slack Integration (Optional)
+  # Credentials stored securely - use: contextflow setup slack
+  slack:
+    enabled: false
+    channel: "#general"  # Channel for notifications
+
+ai_context:
+  # Context file names (will be created in context directory)
+  quick_context_file: "QUICK_CONTEXT.txt"
+  full_context_file: "PROJECT_CONTEXT.md"
+  
+  # Directory for context files (relative to project root)
+  context_directory: "ai-context"
+  
+  # Automatically refresh context after session updates
+  auto_refresh: true
+  
+  # Maximum length of context content (characters)
+  max_context_length: 10000
+  
+  # Include recent changes in context
+  include_recent_changes: true
+
+workflow:
+  # Require session updates at end of each AI session
+  mandatory_session_updates: true
+  
+  # Require work item references (JIRA issues, GitHub issues, etc.)
+  require_work_item_references: true
+  
+  # How long to keep session logs (days)
+  session_log_retention_days: 90
+  
+  # Send team notifications for session updates
+  team_notifications: false
+  
+  # Automatically archive old logs instead of deleting
+  auto_archive_logs: true
+  
+  # Directory for session logs (relative to project root)
+  session_log_directory: "session-logs"
+
+# Advanced Configuration (Optional)
+advanced:
+  # Custom work item patterns (regex)
+  work_item_patterns:
+    - "[A-Z]+-\\d+"     # JIRA-style (PROJ-123)
+    - "#\\d+"           # GitHub-style (#123)
+    - "issue-\\d+"      # Generic issue references
+    - "task-\\d+"       # Generic task references
+  
+  # File patterns to track in session updates
+  file_patterns:
+    - "src/**/*.{js,ts,jsx,tsx,py,java,go,rs}"
+    - "docs/**/*.md"
+    - "*.{json,yaml,yml,toml}"
+  
+  # Exclude patterns for file tracking
+  exclude_patterns:
+    - "node_modules/**"
+    - ".git/**"
+    - "*.log"
+    - "*.tmp"
