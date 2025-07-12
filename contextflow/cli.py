@@ -9,7 +9,7 @@ from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
 
-from .core.config import ContextFlowConfig
+from contextflow.core.config import ContextFlowConfig
 from .core.session_updater import SessionUpdater
 from .core.context_extractor import ContextExtractor
 from .templates.project_templates import ProjectTemplates

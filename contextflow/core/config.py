@@ -244,7 +244,11 @@ class ContextFlowConfig:
     def get_credential(self, integration: str, credential_type: str) -> Optional[str]:
         """Securely retrieve a credential using keyring"""
         key = f"{integration}_{credential_type}"
-        return keyring.get_password(self._keyring_service, key)
+        try:
+            return keyring.get_password(self._keyring_service, key)
+        except Exception as e:
+            # Silently handle keyring errors (credential doesn't exist, access denied, etc.)
+            return None
 
     def prompt_for_credential(
         self, integration: str, credential_type: str, prompt_text: str
@@ -269,13 +273,12 @@ class ContextFlowConfig:
         credential_types = ["username", "password", "api_token", "token"]
 
         for cred_type in credential_types:
-            if cred_type in config:
-                # Try to get from keyring first
-                stored_value = self.get_credential(integration_name, cred_type)
-                if stored_value:
-                    credentials[cred_type] = stored_value
-                elif config[cred_type]:  # Fallback to config file (for migration)
-                    credentials[cred_type] = config[cred_type]
+            # Always try to get from keyring first (credentials should be stored there)
+            stored_value = self.get_credential(integration_name, cred_type)
+            if stored_value:
+                credentials[cred_type] = stored_value
+            elif cred_type in config and config[cred_type]:  # Fallback to config file (for migration)
+                credentials[cred_type] = config[cred_type]
 
         return credentials
 
