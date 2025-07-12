@@ -24,20 +24,53 @@ It automatically captures what you're working on, saves session notes, and gives
 - **Secure Credential Management** - No plaintext passwords, uses system keyring
 - **Personal & Team Friendly** - Works great solo or with small teams
 
+## Recent Improvements
+
+### v1.0.0 - January 2025
+- **🔧 Fixed Keyring Access Issue**: Resolved credential retrieval problems that prevented JIRA/Confluence integration
+- **📦 Proper Module Installation**: Added `__main__.py` and console script entry points for easy execution
+- **🚀 Multiple Execution Methods**: Run via command, Python module, or direct import
+- **✅ Verified Integrations**: JIRA and Confluence integrations now working properly
+- **🛡️ Enhanced Security**: Improved credential handling with system keyring integration
+
 ## Quick Start
 
 ### Installation
 
+#### Option 1: Development Installation (Recommended)
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/contextflow.git
+git clone https://github.com/mattwheeler/contextflow.git
 cd contextflow
 
-# Install dependencies
-pip install -r requirements.txt
+# Install in development mode
+pip install --user -e .
+```
 
-# Run setup
-python setup.py install
+#### Option 2: Direct Installation
+```bash
+# Install from source
+pip install --user git+https://github.com/mattwheeler/contextflow.git
+```
+
+### Running ContextFlow
+
+After installation, you have multiple ways to run ContextFlow:
+
+#### Option 1: Direct Command (if Python bin is in PATH)
+```bash
+contextflow --help
+```
+
+#### Option 2: Full Path to Command
+```bash
+# macOS/Linux (adjust path for your system)
+/Users/yourusername/Library/Python/3.9/bin/contextflow --help
+```
+
+#### Option 3: Python Module
+```bash
+python3 -m contextflow --help
 ```
 
 ### Basic Usage
@@ -47,14 +80,21 @@ python setup.py install
 contextflow init --template software-development
 
 # Setup secure credentials (one-time)
-contextflow setup github
 contextflow setup jira
+contextflow setup confluence
+contextflow setup github
 
 # Start a new AI session with context
 contextflow context --quick
 
 # End session with documentation update
 contextflow update "Implemented user authentication, updated API docs, fixed PROJ-123"
+
+# Check project status
+contextflow status
+
+# View stored credentials
+contextflow credentials
 ```
 
 ## Use Cases
@@ -165,6 +205,83 @@ workflow:
 ## Contributing
 
 Contributions welcome! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+## Troubleshooting
+
+### Installation Issues
+
+#### "contextflow command not found"
+If the `contextflow` command isn't found after installation:
+
+1. **Check if Python bin directory is in PATH:**
+   ```bash
+   echo $PATH | grep -o '/Users/[^/]*/Library/Python/[^/]*/bin'
+   ```
+
+2. **Add Python bin to PATH (macOS):**
+   ```bash
+   echo 'export PATH="$HOME/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
+   source ~/.zshrc
+   ```
+
+3. **Use full path instead:**
+   ```bash
+   /Users/yourusername/Library/Python/3.9/bin/contextflow --help
+   ```
+
+#### "No module named contextflow"
+If you get import errors:
+
+1. **Reinstall in development mode:**
+   ```bash
+   cd contextflow
+   pip install --user -e .
+   ```
+
+2. **Check Python path:**
+   ```bash
+   python3 -c "import sys; print('\n'.join(sys.path))"
+   ```
+
+### Integration Issues
+
+#### "JIRA/Confluence credentials not configured"
+This was a known issue that has been fixed. If you still see this:
+
+1. **Verify credentials are stored:**
+   ```bash
+   contextflow credentials
+   ```
+
+2. **Re-setup credentials if needed:**
+   ```bash
+   contextflow setup jira
+   contextflow setup confluence
+   ```
+
+3. **Test the connection:**
+   ```bash
+   contextflow status
+   ```
+
+#### Keyring Access Issues
+If you get keyring-related errors:
+
+1. **macOS**: Ensure Keychain Access is working
+2. **Linux**: Install `python3-keyring` package
+3. **Windows**: Ensure Windows Credential Manager is accessible
+
+### Common Issues
+
+#### SSL/TLS Warnings
+The urllib3 SSL warnings are harmless and don't affect functionality. They occur due to macOS system Python configuration.
+
+#### Permission Errors
+If you get permission errors during installation:
+```bash
+# Use --user flag to install in user directory
+pip install --user -e .
+```
 
 ## License
 
